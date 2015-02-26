@@ -1,3 +1,3 @@
 public class TestClass{
-	//Some code goes here
+	//Some code should go here
 }
