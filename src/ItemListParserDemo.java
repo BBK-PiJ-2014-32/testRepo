@@ -9,8 +9,6 @@ public class ItemListParserDemo	{
 		Iterator<Contacts> it = contacts.iterator();
 		while(it.hasNext()){
 			System.out.println(it.next().getContact().getId());
-		}
-		
-			
+			}
 		}
  }
