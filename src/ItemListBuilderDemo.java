@@ -1,5 +1,7 @@
 
 import java.io.File;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,6 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
 
  /**
@@ -39,7 +42,13 @@ import org.w3c.dom.ls.LSSerializer;
 	 DOMImplementationLS implLS = (DOMImplementationLS) impl.getFeature("LS", "3.0");
 	 LSSerializer ser = implLS.createLSSerializer();
 	 ser.getDomConfig().setParameter("format-pretty-print", true);
-	 String out = ser.writeToString(doc);
+	 LSOutput lsOutput = implLS.createLSOutput();
+	 lsOutput.setEncoding("UTF-8");
+	 Writer stringWriter = new StringWriter();
+	 lsOutput.setCharacterStream(stringWriter);
+	 ser.write(doc, lsOutput);
+	 
+	 String out = stringWriter.toString();
 
 	 
 	 java.io.FileWriter fw = new java.io.FileWriter("my-file.xml");
