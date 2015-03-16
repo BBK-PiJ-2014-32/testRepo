@@ -28,15 +28,16 @@ public class ItemListParser {
 	
 	public ArrayList<Contacts> parse(String fileName){
 			try{
+				System.out.println(fileName);
 				File f = new File(fileName);
 				Document doc = builder.parse(f);
 				 ArrayList<Contacts> items = new ArrayList<Contacts>(); 
-				 int itemCount = Integer.parseInt(path.evaluate("count(/items/item)", doc)); 
+				 int itemCount = Integer.parseInt(path.evaluate("count(/contacts/contact)", doc)); 
 				 for (int i = 1; i <= itemCount; i++) {
-					 String idStr = path.evaluate("/items/Contact[" + i + "]/Contact/ID", doc);
+					 String idStr = path.evaluate("/contacts/contact[" + i + "]/Contact/ID", doc);
 					 int id = Integer.parseInt(idStr);
-					 String name = path.evaluate( "/items/Contact[" + i + "]/Contact/Name", doc);
-					 String notes = path.evaluate("/items/Contact[" + i + "]/Contact/Notes", doc);
+					 String name = path.evaluate( "/contacts/contact[" + i + "]/Contact/Name", doc);
+					 String notes = path.evaluate("/contacts/contact[" + i + "]/Contact/Notes", doc);
 					 Contact c = new ContactImpl(name, id);
 					 c.addNotes(notes);
 					 Contacts it = new Contacts(c); 

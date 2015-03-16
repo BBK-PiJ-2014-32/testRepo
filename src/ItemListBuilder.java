@@ -59,7 +59,7 @@ private DocumentBuilder builder;
   */
   private Element createContact(Contacts aContact)
   {
-  Element e = doc.createElement("Contact");
+  Element e = doc.createElement("contact");
  
   e.appendChild(createContact(aContact.getContact()));
  
