@@ -31,13 +31,14 @@ public class ItemListParser {
 				File f = new File(fileName);
 				Document doc = builder.parse(f);
 				 ArrayList<Contacts> items = new ArrayList<Contacts>(); 
-				 int itemCount = Integer.parseInt(path.evaluate(
-				 "count(/items/item)", doc)); 
+				 int itemCount = Integer.parseInt(path.evaluate("count(/items/item)", doc)); 
 				 for (int i = 1; i <= itemCount; i++) {
-					 String description = path.evaluate("/items/item[" + i + "]/product/description", doc);
-					 int price = Double.parseDouble(path.evaluate( "/items/item[" + i + "]/product/price", doc));
-					 Contact c = new ContactImpl(description, price); 
-					 int quantity = Integer.parseInt(path.evaluate("/items/item[" + i + "]/quantity", doc)); 
+					 String idStr = path.evaluate("/items/Contact[" + i + "]/Contact/ID", doc);
+					 int id = Integer.parseInt(idStr);
+					 String name = path.evaluate( "/items/Contact[" + i + "]/Contact/Name", doc);
+					 String notes = path.evaluate("/items/Contact[" + i + "]/Contact/Notes", doc);
+					 Contact c = new ContactImpl(name, id);
+					 c.addNotes(notes);
 					 Contacts it = new Contacts(c); 
 					 items.add(it);
 				 	}
@@ -50,6 +51,7 @@ public class ItemListParser {
 			} catch (XPathExpressionException ex){
 				ex.printStackTrace();
 			}
+			return null;
 		}
 
 	
