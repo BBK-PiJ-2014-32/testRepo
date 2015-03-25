@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
  
 public class WriteXMLFile {
  
-	public static void main(String argv[]) {
+	public static void main(String args[]) {
  
 	  try {
  
@@ -65,7 +65,7 @@ public class WriteXMLFile {
 
 		attr = doc.createAttribute("id");
 		attr.setValue(String.valueOf(contact2.getId()));
-		contact.
+
 
  
 		//name = doc.createElement("Name");
